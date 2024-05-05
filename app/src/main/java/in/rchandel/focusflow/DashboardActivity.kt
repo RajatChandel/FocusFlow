@@ -1,10 +1,12 @@
 package `in`.rchandel.focusflow
 
+import `in`.rchandel.focusflow.data.JournalItem
 import `in`.rchandel.focusflow.databinding.ActivityDashboardBinding
 import `in`.rchandel.focusflow.repository.TodoRepository
 import `in`.rchandel.focusflow.viewmodel.DashboardViewModel
 import `in`.rchandel.focusflow.viewmodel.DashboardViewModelProvider
 import `in`.rchandel.focusflow.views.CustomCardView
+import `in`.rchandel.focusflow.views.JournalView
 import `in`.rchandel.focusflow.views.ParentCartView
 import `in`.rchandel.focusflow.views.TodoListView
 import androidx.appcompat.app.AppCompatActivity
@@ -36,7 +38,8 @@ class DashboardActivity : AppCompatActivity() {
         customCardViewTwo.setView(FrameLayout(this), "Calender")
 
         var customCardViewThree = CustomCardView(this)
-        customCardViewThree.setView(FrameLayout(this), "Today's Journal")
+        var journalView = JournalView(this)
+        customCardViewThree.setView(journalView, "Today's Journal")
 
         val parentCartView = ParentCartView(this)
         binding.parentView.addView(parentCartView)
@@ -46,14 +49,18 @@ class DashboardActivity : AppCompatActivity() {
         customCardViewTwo.shiftTitleBottom()
         customCardViewThree.shiftTitleBottom()
 
+
+
         parentCartView.addViewToList(customCardViewOne, 0)
 
 
 //        parentCartView.bringToTop(2)
 
         dashboardViewModel.todoLiveDate.observe(this) {
-            Log.d("INAPPLOG", "view model observe called")
-            listView.updateList(it)
+            Log.d("INAPPLOG", "view model observe called ${it.first.size}")
+            listView.updateList(it.first)
+            journalView.updateJournalItem(it.second)
+
         }
         dashboardViewModel.getTodoItemsByDate(Date())
     }

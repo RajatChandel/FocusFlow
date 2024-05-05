@@ -9,29 +9,31 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="32dp"
         android:elevation="4dp"
+        app:cardCornerRadius="18dp"
         android:layout_margin="10dp">
 
         <LinearLayout
             android:id="@+id/cv_parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="32dp"
             android:orientation="vertical">
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:layout_marginBottom="32dp"
+            android:textColor="@color/titleColor"
+            android:textStyle="bold"
             tools:text="Dummy title"/>
 
         <FrameLayout
             android:id="@+id/custom_view_container"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_marginBottom="32dp" />
+            android:layout_marginTop="32dp"
+            android:layout_height="300dp" />
 
         </LinearLayout>
 

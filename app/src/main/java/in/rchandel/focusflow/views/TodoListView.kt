@@ -29,11 +29,6 @@ class TodoListView : LinearLayout{
         binding = TodoListViewBinding.bind(this)
     }
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-
-    }
-
     fun updateList(list: List<TodoItem>) {
         Log.d("INAPPLOG", "listView")
         binding?.rvTodoItems?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

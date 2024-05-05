@@ -34,7 +34,7 @@ class ParentCartView : FrameLayout, ICustomView {
         viewList.add( view)
         binding?.flParent?.addView(view)
         var params = view.layoutParams as ViewGroup.MarginLayoutParams
-        params.setMargins(0, 140 * position, 0, 0)
+        params.setMargins(0, 192 * position, 0, 0)
     }
 
     fun bringToTop(index1: Int) {
@@ -61,6 +61,9 @@ class ParentCartView : FrameLayout, ICustomView {
     }
 
     override fun changeTopElement(position: Int) {
+        if(currentPos == position) {
+            return
+        }
         var foundTop = false
         viewList.forEachIndexed { index, customCardView ->
             if (foundTop) {

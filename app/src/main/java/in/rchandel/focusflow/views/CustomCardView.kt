@@ -7,6 +7,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.math.exp
 
@@ -35,8 +36,8 @@ class CustomCardView : LinearLayout {
     fun setView(view: View, title: String) {
         binding?.customViewContainer?.removeAllViews()
         binding?.customViewContainer?.addView(view)
-        binding?.title?.text = title
-        binding?.title?.setOnClickListener{
+        binding?.title?.text = title.uppercase()
+        binding?.cvParent?.setOnClickListener{
             shiftTitleUp()
             this.iCustomView.changeTopElement(position ?: 0)
         }
