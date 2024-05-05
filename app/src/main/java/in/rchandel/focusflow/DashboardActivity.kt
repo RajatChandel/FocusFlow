@@ -1,6 +1,5 @@
 package `in`.rchandel.focusflow
 
-import `in`.rchandel.focusflow.data.JournalItem
 import `in`.rchandel.focusflow.databinding.ActivityDashboardBinding
 import `in`.rchandel.focusflow.repository.TodoRepository
 import `in`.rchandel.focusflow.viewmodel.DashboardViewModel
@@ -12,7 +11,7 @@ import `in`.rchandel.focusflow.views.TodoListView
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.FrameLayout
+import android.widget.CalendarView
 import androidx.lifecycle.ViewModelProvider
 import java.util.*
 
@@ -30,16 +29,23 @@ class DashboardActivity : AppCompatActivity() {
         dashboardViewModelProvider = DashboardViewModelProvider(TodoRepository())
         dashboardViewModel = ViewModelProvider(this, dashboardViewModelProvider)[DashboardViewModel::class.java]
 
-        var customCardViewOne = CustomCardView(this)
-        var listView = TodoListView(this)
+        val customCardViewOne = CustomCardView(this)
+        val listView = TodoListView(this)
         customCardViewOne.setView(listView, "Today's Todo")
 
-        var customCardViewTwo = CustomCardView(this)
-        customCardViewTwo.setView(FrameLayout(this), "Calender")
+        val customCardViewTwo = CustomCardView(this)
+        val calendarView = CalendarView(this)
+        customCardViewTwo.setView(calendarView, "Calendar")
 
-        var customCardViewThree = CustomCardView(this)
-        var journalView = JournalView(this)
+        val customCardViewThree = CustomCardView(this)
+        val journalView = JournalView(this)
         customCardViewThree.setView(journalView, "Today's Journal")
+        
+        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+            val calendar = Calendar.getInstance()
+            calendar.set(year, month, dayOfMonth)
+            dashboardViewModel.getTodoItemsByDate(calendar.time)
+        }
 
         val parentCartView = ParentCartView(this)
         binding.parentView.addView(parentCartView)
@@ -50,11 +56,7 @@ class DashboardActivity : AppCompatActivity() {
         customCardViewThree.shiftTitleBottom()
 
 
-
         parentCartView.addViewToList(customCardViewOne, 0)
-
-
-//        parentCartView.bringToTop(2)
 
         dashboardViewModel.todoLiveDate.observe(this) {
             Log.d("INAPPLOG", "view model observe called ${it.first.size}")

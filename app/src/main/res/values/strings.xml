@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">FocusFlow</string>
+    <string name="focusflow_title">FocusFlow</string>
+    <string name="focus">FOCUS</string>
+    <string name="flow">FLOW</string>
 </resources>

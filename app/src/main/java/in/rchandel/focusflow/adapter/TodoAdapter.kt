@@ -3,10 +3,10 @@ package `in`.rchandel.focusflow.adapter
 import `in`.rchandel.focusflow.data.TodoItem
 import `in`.rchandel.focusflow.databinding.TodoItemViewBinding
 import android.content.Context
+import android.graphics.Paint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
@@ -21,7 +21,6 @@ class TodoAdapter(private val context: Context) : Adapter<TodoAdapter.TodoViewHo
     fun updateList(newList : List<TodoItem>) {
         todoItemList.clear()
         todoItemList.addAll(newList)
-        Log.d("INAPPLOG", "adapter ${newList.size}")
         notifyDataSetChanged()
     }
 
@@ -32,7 +31,10 @@ class TodoAdapter(private val context: Context) : Adapter<TodoAdapter.TodoViewHo
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         holder.textField.isEnabled = false
         holder.textField.text = todoItemList[position].title
-        Log.d("INAPPLOG", "adapter ${position}")
+        if(todoItemList[position].isDone) {
+            holder.textField.paintFlags =
+                holder.textField.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        }
     }
 
     override fun getItemCount(): Int {
