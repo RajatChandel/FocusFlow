@@ -12,6 +12,10 @@ import android.widget.LinearLayout
 
 class ParentCartView : FrameLayout, ICustomView {
 
+    companion object {
+        const val MARGIN_CHILDREN = 192
+    }
+
     private val viewList = mutableListOf<CustomCardView>()
     var binding: ParentCardViewBinding? = null
     var currentPos : Int = 0
@@ -36,7 +40,7 @@ class ParentCartView : FrameLayout, ICustomView {
 
         //setting margin for views as per their position, with each positions the margin increases in the stack
         val params = view.layoutParams as ViewGroup.MarginLayoutParams
-        params.setMargins(0, 192 * position, 0, 0)
+        params.setMargins(0, MARGIN_CHILDREN * position, 0, 0)
     }
 
     // this method brings the selected view to the top of the stack
