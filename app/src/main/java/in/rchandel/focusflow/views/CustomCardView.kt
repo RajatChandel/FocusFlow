@@ -10,10 +10,11 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.math.exp
 
-class CustomCardView : LinearLayout, ICustomView {
+class CustomCardView : LinearLayout {
 
-     var binding : ViewCustomCardBinding? = null
-
+    var binding: ViewCustomCardBinding? = null
+    lateinit var iCustomView: ICustomView
+    var position : Int? = null
 
     constructor(context: Context) : super(context) {
         View.inflate(context, R.layout.view_custom_card, this)
@@ -25,18 +26,32 @@ class CustomCardView : LinearLayout, ICustomView {
         binding = ViewCustomCardBinding.bind(this)
     }
 
+    fun setMeta(iCustomView: ICustomView, pos : Int) {
+        this.iCustomView = iCustomView
+        this.position = pos
+    }
+
+
     fun setView(view: View, title: String) {
         binding?.customViewContainer?.removeAllViews()
         binding?.customViewContainer?.addView(view)
         binding?.title?.text = title
+        binding?.title?.setOnClickListener{
+            shiftTitleUp()
+            this.iCustomView.changeTopElement(position ?: 0)
+        }
     }
 
-    override fun changeVisibility(expanded: Boolean) {
-        if(expanded) {
-            binding?.customViewContainer?.visibility = View.VISIBLE
-        } else {
-            binding?.customViewContainer?.visibility = View.VISIBLE
-        }
+    fun shiftTitleUp() {
+        binding?.cvParent?.removeAllViews()
+        binding?.cvParent?.addView(binding?.title)
+        binding?.cvParent?.addView(binding?.customViewContainer)
+    }
+
+    fun shiftTitleBottom() {
+        binding?.cvParent?.removeAllViews()
+        binding?.cvParent?.addView(binding?.customViewContainer)
+        binding?.cvParent?.addView(binding?.title)
     }
 
 }
