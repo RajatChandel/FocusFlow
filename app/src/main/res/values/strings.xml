@@ -5,5 +5,5 @@
     <string name="flow">FLOW</string>
     <string name="title_todo_page">Today\'s Todo</string>
     <string name="title_calendar">Calendar</string>
-    <string name="title_journal">Today\'s Journal</string>
+    <string name="title_journal">Journal</string>
 </resources>

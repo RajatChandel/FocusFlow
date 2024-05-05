@@ -63,7 +63,7 @@ class TodoRepository {
     private fun getMockJournalItem(date: Date): JournalItem {
         return JournalItem(
             "1",
-            "Today marked the end of a long and challenging journey as I finally submitted my thesis for review. The culmination of months of research, writing, and revisions, this moment feels both surreal and immensely satisfying. As I hit the \"send\" button, I couldn't help but reflect on the countless hours spent poring over literature, designing experiments, and grappling with data analysis. Despite the inevitable setbacks and moments of self-doubt, I emerged stronger and more resilient.",
+            "Today marked the end of a long and challenging journey as I finally submitted my thesis for review. The culmination of months of research, writing, and revisions, this moment feels both surreal and immensely satisfying. As I hit the \"send\" button, I couldn't help but reflect on the countless hours spent poring over literature, designing experiments, and grappling with data analysis.",
             date
         )
     }
