@@ -33,11 +33,14 @@ class ParentCartView : FrameLayout, ICustomView {
         currentPos = viewList.size
         viewList.add( view)
         binding?.flParent?.addView(view)
-        var params = view.layoutParams as ViewGroup.MarginLayoutParams
+
+        //setting margin for views as per their position, with each positions the margin increases in the stack
+        val params = view.layoutParams as ViewGroup.MarginLayoutParams
         params.setMargins(0, 192 * position, 0, 0)
     }
 
-    fun bringToTop(index1: Int) {
+    // this method brings the selected view to the top of the stack
+    private fun bringToTop(index1: Int) {
         this.removeAllViews()
         if(index1 < currentPos) {
             for (i in viewList.indices.reversed()) {
@@ -56,10 +59,7 @@ class ParentCartView : FrameLayout, ICustomView {
         this.addView(viewList[index1])
     }
 
-    override fun getChildDrawingOrder(childCount: Int, drawingPosition: Int): Int {
-        return childCount - 1 - drawingPosition;
-    }
-
+    //this method changes the layout based on which position(view) is visible
     override fun changeTopElement(position: Int) {
         if(currentPos == position) {
             return

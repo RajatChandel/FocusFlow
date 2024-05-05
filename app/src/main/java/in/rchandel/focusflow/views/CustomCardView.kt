@@ -43,12 +43,14 @@ class CustomCardView : LinearLayout {
         }
     }
 
+    //shifts title to the top when view is selected
     fun shiftTitleUp() {
         binding?.cvParent?.removeAllViews()
         binding?.cvParent?.addView(binding?.title)
         binding?.cvParent?.addView(binding?.customViewContainer)
     }
 
+    //shifts title to the bottom when view is not selected
     fun shiftTitleBottom() {
         binding?.cvParent?.removeAllViews()
         binding?.cvParent?.addView(binding?.customViewContainer)

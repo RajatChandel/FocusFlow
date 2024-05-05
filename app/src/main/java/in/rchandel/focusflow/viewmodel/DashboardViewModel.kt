@@ -17,6 +17,5 @@ class DashboardViewModel(private val todoRepository: TodoRepository) : ViewModel
 
     fun getTodoItemsByDate(date: Date) {
         todoRepository.getTodoItems(date)
-        Log.d("INAPPLOG", "view model called")
     }
 }
